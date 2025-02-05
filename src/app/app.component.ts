@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { registerFormConfig } from './config/register-form-config';
+import { IForm } from './interfaces/form.interface';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss'],
+  imports: [DynamicFormComponent],
 })
-export class AppComponent {
-  title = 'tahaluf';
+export class AppComponent implements OnInit {
+  title = 'dynamic-form-building';
+  registerForm = registerFormConfig as IForm;
+
+  ngOnInit(): void {}
 }

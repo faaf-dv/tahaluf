@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { registerFormConfig } from './config/register-form-config';
 import { IForm } from './interfaces/form.interface';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [DynamicFormComponent],
+  imports: [DynamicFormComponent, SettingsComponent],
 })
 export class AppComponent implements OnInit {
   title = 'dynamic-form-building';

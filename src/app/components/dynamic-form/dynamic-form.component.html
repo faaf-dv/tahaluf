@@ -1,52 +1,79 @@
 <h3 class="text-center p-5">{{ form.formTitle }}</h3>
 <form [formGroup]="dynamicFormGroup" class="row g-4 border p-3">
-   
   <!-- Loop through form controls -->
-   
-  <ng-container *ngFor="let control of form.formControls">
-       
-    <div
-      *ngIf="
-        ['text', 'email', 'password', 'number', 'date'].includes(control.type)
-      "
-      [class]="control?.class"
+  @for (control of form.formControls; track $index) { @if (['textbox', 'email',
+  'password', 'number', 'date'].includes(control.type)) {
+  <div [class]="control?.class">
+    <label for="{{ control.name }}" class="form-label">{{
+      control.label
+    }}</label>
+    <input
+      pInputText
+      formControlName="{{ control?.name }}"
+      [type]="control?.type"
+      class="form-control"
+      (click)="onSelectControl(control)"
+    />
+
+    <small
+      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+      class="text-danger"
     >
-           
-      <label for="{{ control.name }}" class="form-label">{{
-        control.label
-      }}</label>
-           
-      <input
-        formControlName="{{ control?.name }}"
-        [type]="control?.type"
-        class="form-control"
-      />
-           
-      <small
-        *ngIf="dynamicFormGroup.get(control.name)?.invalid"
-        class="text-danger"
-      >
-                {{ getErrorMessage(control) }}      
-      </small>
-         
-    </div>
+      {{ getErrorMessage(control) }}
+    </small>
+  </div>
 
-       
-    <!-- Implement rendering for other control types: select and radio -->
+  } @else if ( control.type == 'button') {
+  <div [class]="control?.class">
+    <label for="{{ control.name }}" class="form-label">{{
+      control.label
+    }}</label>
+    <p-button
+      class="form-control"
+      (click)="onSelectControl(control)"
+      [label]="control.caption"
+    >
+    </p-button>
+    <small
+      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+      class="text-danger"
+    >
+      {{ getErrorMessage(control) }}
+    </small>
+  </div>
 
-     
-  </ng-container>
+  } @else if ( control.type == 'textarea') {
+  <div [class]="control?.class">
+    <label for="{{ control.name }}" class="form-label">{{
+      control.label
+    }}</label>
+    <textarea
+      (click)="onSelectControl(control)"
+      pTextarea
+      formControlName="{{ control?.name }}"
+      class="form-control"
+    ></textarea>
 
-   
+    <small
+      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+      class="text-danger"
+    >
+      {{ getErrorMessage(control) }}
+    </small>
+  </div>
+
+  } }
   <div class="col-12">
-       
-    <button (click)="onSubmit()" type="button" class="btn btn-primary mx-2">
+    <p-button (click)="onSubmit()" type="button" class="btn btn-primary mx-2">
       {{ form.saveBtnTitle }}
-    </button>
-       
-    <button (click)="resetForm()" type="button" class="btn btn-secondary mx-2">
+    </p-button>
+    <p-button
+      (click)="resetForm()"
+      severity="secondary"
+      type="button"
+      class="btn btn-secondary mx-2"
+    >
       {{ form.resetBtnTitle }}
-    </button>
-     
+    </p-button>
   </div>
 </form>

@@ -7,14 +7,19 @@ export interface IForm {
 
 interface IFormControl {
   name: string;
-  label: string;
-  value: string;
+  id: string;
+  label?: string;
+  value?: string;
   options?: IOption[];
   radioOptions?: string[];
-  placeholder: string;
-  class: string;
-  type: string;
-  validators: IValidator[];
+  placeholder?: string;
+  class?: string;
+  type: FormControlType;
+  validators?: IValidator[];
+  border?: any;
+  rows?: number;
+  cols?: number;
+  caption?: string;
 }
 
 interface IValidator {
@@ -31,3 +36,5 @@ interface IOption {
   id?: number;
   value?: string;
 }
+
+export type FormControlType = 'textbox' | 'textarea' | 'button';

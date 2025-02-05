@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,16 +7,27 @@ import {
 } from '@angular/forms';
 import { IForm } from '../../interfaces/form.interface';
 import { CommonModule } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from 'primeng/button';
+import { SettingsStore } from '../../state/settings.store';
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    InputTextModule,
+    TextareaModule,
+    ButtonModule,
+  ],
 })
 export class DynamicFormComponent implements OnInit {
   @Input() form!: IForm;
   dynamicFormGroup: FormGroup;
+  settingsStore = inject(SettingsStore);
 
   constructor(private fb: FormBuilder) {
     this.dynamicFormGroup = this.fb.group({}, { updateOn: 'submit' });
@@ -58,4 +69,8 @@ export class DynamicFormComponent implements OnInit {
   }
 
   getErrorMessage(control: any) {}
+
+  onSelectControl(control: any) {
+    this.settingsStore.setControl(control);
+  }
 }

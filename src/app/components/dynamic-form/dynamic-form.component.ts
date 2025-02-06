@@ -25,30 +25,8 @@ import { SettingsStore } from '../../state/settings.store';
   ],
 })
 export class DynamicFormComponent implements OnInit {
-  getCaption(control: IFormControl): string | undefined {
-    const rows = control.settings?.find((t: any) => t.name == 'caption');
-    if (rows) {
-      return rows.value;
-    }
-    return undefined;
-  }
-
-  getRows(control: IFormControl) {
-    const rows = control.settings?.find((t: any) => t.name == 'rows');
-    if (rows) {
-      return rows.value;
-    }
-    return undefined;
-  }
-  getCols(control: IFormControl) {
-    const cols = control.settings?.find((t: any) => t.name == 'cols');
-    if (cols) {
-      return cols.value;
-    }
-    return undefined;
-  }
-  getBorder(control: IFormControl) {
-    const border = control.settings?.find((t: any) => t.name == 'border');
+  getValue(key: string, control: IFormControl) {
+    const border = control.settings?.find((t: any) => t.name == key);
     if (border) {
       return border.value;
     }

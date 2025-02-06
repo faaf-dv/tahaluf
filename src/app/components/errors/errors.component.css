@@ -1,0 +1,11 @@
+.errors {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 10px;
+  padding-left: 50px;
+}
+.error {
+  color: red;
+  font-size: 0.8em;
+}

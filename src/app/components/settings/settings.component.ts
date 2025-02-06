@@ -1,7 +1,12 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { SettingsStore } from '../../state/settings.store';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
@@ -20,10 +25,20 @@ export class SettingsComponent {
       if (settings) {
         for (let i = 0; i < settings?.length; i++) {
           const setting = settings[i];
-          this.settingsForm.addControl(
-            setting.name,
-            this.fb.control(setting.value)
-          );
+          if (setting.name == 'name') {
+            this.settingsForm.addControl(
+              setting.name,
+              this.fb.control(setting.value, [
+                Validators.minLength(5),
+                Validators.maxLength(10),
+              ])
+            );
+          } else {
+            this.settingsForm.addControl(
+              setting.name,
+              this.fb.control(setting.value)
+            );
+          }
         }
       }
     });
@@ -55,13 +70,26 @@ export class SettingsComponent {
 
   onSave() {
     const settings: any[] = [];
+    const errors: { key: string; value: string }[] = [];
     const entries = Object.entries(this.settingsForm.value);
     for (let i = 0; i < entries.length; i++) {
-      const entry = entries[i];
+      const entry: any = entries[i];
       settings.push({
         name: entry[0],
         value: entry[1],
       });
+      if (entry[0] == 'name') {
+        if (entry[1].length < 5 || entry[1].length > 10) errors.push();
+        if (
+          this.settingsForm.get('name')?.hasError('minlength') ||
+          this.settingsForm.get('name')?.hasError('maxlength')
+        ) {
+          this.settingsStore.addError({
+            key: 'length',
+            value: entry[1],
+          });
+        }
+      }
     }
     this.settingsStore.updateSettings(settings);
   }

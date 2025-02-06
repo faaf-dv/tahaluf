@@ -1,0 +1,7 @@
+<p-drawer [(visible)]="visible" [modal]="false" position="bottom">
+  <div class="errors">
+    @for (error of settingsStore.errors(); track $index) {
+    <div class="error">{{ error.value }}</div>
+    }
+  </div>
+</p-drawer>

@@ -11,7 +11,8 @@
         [type]="control?.type"
         class="form-control"
         (click)="onSelectControl(control)"
-        [style.border]="getBorder(control)"
+        [style.border]="getValue('border', control)"
+        [placeholder]="getValue('placeholder', control)"
       />
 
       <small
@@ -27,7 +28,7 @@
       <p-button
         class="form-control"
         (click)="onSelectControl(control)"
-        [label]="getCaption(control)"
+        [label]="getValue('caption', control)"
       >
       </p-button>
       <small
@@ -45,9 +46,10 @@
         pTextarea
         formControlName="{{ control?.name }}"
         class="form-control"
-        [rows]="getRows(control)"
-        [cols]="getCols(control)"
-        [style.border]="getBorder(control)"
+        [rows]="getValue('rows', control)"
+        [cols]="getValue('cols', control)"
+        [style.border]="getValue('border', control)"
+        [placeholder]="getValue('placeholder', control)"
       ></textarea>
 
       <small

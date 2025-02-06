@@ -1,7 +1,7 @@
 import { IForm } from '../interfaces/form.interface';
 
 export const registerFormConfig: IForm = {
-  formTitle: 'Gym Registration Form',
+  formTitle: 'Dynamic Angular Form',
   saveBtnTitle: 'Confirm Registration',
   resetBtnTitle: 'Reset',
   formControls: [
@@ -25,6 +25,10 @@ export const registerFormConfig: IForm = {
         {
           name: 'border',
           value: '1px solid green',
+        },
+        {
+          name: 'placeholder',
+          value: 'First Name',
         },
       ],
       validators: [
@@ -66,6 +70,10 @@ export const registerFormConfig: IForm = {
           name: 'border',
           value: '1px solid orange',
         },
+        {
+          name: 'placeholder',
+          value: 'Second Name',
+        },
       ],
     },
     {
@@ -104,6 +112,10 @@ export const registerFormConfig: IForm = {
           name: 'cols',
           value: '30',
         },
+        {
+          name: 'placeholder',
+          value: 'Second Name',
+        },
       ],
     },
     {
@@ -132,6 +144,32 @@ export const registerFormConfig: IForm = {
       },
       rows: 8,
       cols: 40,
+      settings: [
+        {
+          name: 'name',
+          value: 'secondTextarea',
+        },
+        {
+          name: 'id',
+          value: '456',
+        },
+        {
+          name: 'border',
+          value: '1px solid blue',
+        },
+        {
+          name: 'rows',
+          value: '8',
+        },
+        {
+          name: 'cols',
+          value: '40',
+        },
+        {
+          name: 'placeholder',
+          value: 'Second text area',
+        },
+      ],
     },
     {
       type: 'textarea',
@@ -143,6 +181,32 @@ export const registerFormConfig: IForm = {
       },
       rows: 6,
       cols: 35,
+      settings: [
+        {
+          name: 'name',
+          value: 'secondName',
+        },
+        {
+          name: 'id',
+          value: '456',
+        },
+        {
+          name: 'border',
+          value: '1px solid blue',
+        },
+        {
+          name: 'rows',
+          value: '6',
+        },
+        {
+          name: 'cols',
+          value: '35',
+        },
+        {
+          name: 'placeholder',
+          value: 'Third text area',
+        },
+      ],
     },
   ],
 };

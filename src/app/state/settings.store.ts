@@ -113,7 +113,9 @@ export const SettingsStore = signalStore(
     resetErrors: () => {
       patchState(store, (state) => ({
         ...state,
-        errors: [],
+        errors: store
+          .errors()
+          .filter((t: any) => !t.key.startsWith(store.selectedControl().name)),
       }));
     },
     resetSelectedControl: () => {

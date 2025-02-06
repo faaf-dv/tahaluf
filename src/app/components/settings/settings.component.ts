@@ -69,6 +69,7 @@ export class SettingsComponent {
   }
 
   onSave() {
+    this.settingsStore.resetErrors();
     const settings: any[] = [];
     const errors: { key: string; value: string }[] = [];
     const entries = Object.entries(this.settingsForm.value);

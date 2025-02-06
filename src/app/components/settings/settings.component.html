@@ -1,13 +1,38 @@
+@if (settingsStore.selectedControl()) {
 <p-drawer
   [(visible)]="visible"
   [modal]="false"
-  header="Settings"
+  [header]="name()"
   position="right"
 >
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat.
-  </p>
+  <form [formGroup]="settingsForm" class="form">
+    <div class="controls">
+      @for (setting of settingsStore.selectedControl().settings; track $index) {
+      <div class="field">
+        <label for="{{ setting.name }}">{{ setting.name }}</label>
+
+        <input
+          pInputText
+          formControlName="{{ setting.name }}"
+          class="form-control"
+          id="{{ setting.name }}"
+          placeholder="{{ setting.name }}"
+          [value]="setting.value"
+        />
+      </div>
+      }
+    </div>
+
+    <div class="buttons">
+      <p-button (click)="onSave()" type="button" label="Save"> </p-button>
+      <p-button
+        (click)="onReset()"
+        severity="secondary"
+        label="Reset"
+        type="button"
+      >
+      </p-button>
+    </div>
+  </form>
 </p-drawer>
+}

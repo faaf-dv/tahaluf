@@ -5,7 +5,7 @@ export interface IForm {
   resetBtnTitle?: string;
 }
 
-interface IFormControl {
+export interface IFormControl {
   name: string;
   id: string;
   label?: string;
@@ -20,6 +20,12 @@ interface IFormControl {
   rows?: number;
   cols?: number;
   caption?: string;
+  settings?: ISetting[];
+}
+
+export interface ISetting {
+  name: string;
+  value: string;
 }
 
 interface IValidator {

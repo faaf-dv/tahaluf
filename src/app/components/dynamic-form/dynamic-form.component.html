@@ -1,79 +1,76 @@
-<h3 class="text-center p-5">{{ form.formTitle }}</h3>
-<form [formGroup]="dynamicFormGroup" class="row g-4 border p-3">
-  <!-- Loop through form controls -->
-  @for (control of form.formControls; track $index) { @if (['textbox', 'email',
-  'password', 'number', 'date'].includes(control.type)) {
-  <div [class]="control?.class">
-    <label for="{{ control.name }}" class="form-label">{{
-      control.label
-    }}</label>
-    <input
-      pInputText
-      formControlName="{{ control?.name }}"
-      [type]="control?.type"
-      class="form-control"
-      (click)="onSelectControl(control)"
-    />
+<div class="wrapper">
+  <h3 class="text-center p-5">{{ form.formTitle }}</h3>
+  <form [formGroup]="dynamicFormGroup" class="form">
+    <!-- Loop through form controls -->
+    @for (control of form.formControls; track $index) { @if (['textbox',
+    'email', 'password', 'number', 'date'].includes(control.type)) {
+    <div [class]="control?.class">
+      <input
+        pInputText
+        formControlName="{{ control?.name }}"
+        [type]="control?.type"
+        class="form-control"
+        (click)="onSelectControl(control)"
+        [style.border]="getBorder(control)"
+      />
 
-    <small
-      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
-      class="text-danger"
-    >
-      {{ getErrorMessage(control) }}
-    </small>
-  </div>
+      <small
+        *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+        class="text-danger"
+      >
+        {{ getErrorMessage(control) }}
+      </small>
+    </div>
 
-  } @else if ( control.type == 'button') {
-  <div [class]="control?.class">
-    <label for="{{ control.name }}" class="form-label">{{
-      control.label
-    }}</label>
-    <p-button
-      class="form-control"
-      (click)="onSelectControl(control)"
-      [label]="control.caption"
-    >
-    </p-button>
-    <small
-      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
-      class="text-danger"
-    >
-      {{ getErrorMessage(control) }}
-    </small>
-  </div>
+    } @else if ( control.type == 'button') {
+    <div [class]="control?.class">
+      <p-button
+        class="form-control"
+        (click)="onSelectControl(control)"
+        [label]="getCaption(control)"
+      >
+      </p-button>
+      <small
+        *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+        class="text-danger"
+      >
+        {{ getErrorMessage(control) }}
+      </small>
+    </div>
 
-  } @else if ( control.type == 'textarea') {
-  <div [class]="control?.class">
-    <label for="{{ control.name }}" class="form-label">{{
-      control.label
-    }}</label>
-    <textarea
-      (click)="onSelectControl(control)"
-      pTextarea
-      formControlName="{{ control?.name }}"
-      class="form-control"
-    ></textarea>
+    } @else if ( control.type == 'textarea') {
+    <div [class]="control?.class">
+      <textarea
+        (click)="onSelectControl(control)"
+        pTextarea
+        formControlName="{{ control?.name }}"
+        class="form-control"
+        [rows]="getRows(control)"
+        [cols]="getCols(control)"
+        [style.border]="getBorder(control)"
+      ></textarea>
 
-    <small
-      *ngIf="dynamicFormGroup.get(control.name)?.invalid"
-      class="text-danger"
-    >
-      {{ getErrorMessage(control) }}
-    </small>
-  </div>
+      <small
+        *ngIf="dynamicFormGroup.get(control.name)?.invalid"
+        class="text-danger"
+      >
+        {{ getErrorMessage(control) }}
+      </small>
+    </div>
 
-  } }
-  <div class="col-12">
-    <p-button (click)="onSubmit()" type="button" class="btn btn-primary mx-2">
-      {{ form.saveBtnTitle }}
-    </p-button>
-    <p-button
-      (click)="resetForm()"
-      severity="secondary"
-      type="button"
-      class="btn btn-secondary mx-2"
-    >
-      {{ form.resetBtnTitle }}
-    </p-button>
-  </div>
-</form>
+    } }
+    <div class="col-12">
+      <p-button (click)="onSubmit()" type="button" class="btn btn-primary mx-2">
+        {{ form.saveBtnTitle }}
+      </p-button>
+      <p-button
+        (click)="resetForm()"
+        severity="secondary"
+        type="button"
+        class="btn btn-secondary mx-2"
+      >
+        {{ form.resetBtnTitle }}
+      </p-button>
+    </div>
+  </form>
+</div>

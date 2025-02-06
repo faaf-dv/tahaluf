@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IForm } from '../../interfaces/form.interface';
+import { IForm, IFormControl } from '../../interfaces/form.interface';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
@@ -15,7 +15,7 @@ import { SettingsStore } from '../../state/settings.store';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
-  styleUrl: './dynamic-form.component.scss',
+  styleUrl: './dynamic-form.component.css',
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -25,6 +25,36 @@ import { SettingsStore } from '../../state/settings.store';
   ],
 })
 export class DynamicFormComponent implements OnInit {
+  getCaption(control: IFormControl): string | undefined {
+    const rows = control.settings?.find((t: any) => t.name == 'caption');
+    if (rows) {
+      return rows.value;
+    }
+    return undefined;
+  }
+
+  getRows(control: IFormControl) {
+    const rows = control.settings?.find((t: any) => t.name == 'rows');
+    if (rows) {
+      return rows.value;
+    }
+    return undefined;
+  }
+  getCols(control: IFormControl) {
+    const cols = control.settings?.find((t: any) => t.name == 'cols');
+    if (cols) {
+      return cols.value;
+    }
+    return undefined;
+  }
+  getBorder(control: IFormControl) {
+    const border = control.settings?.find((t: any) => t.name == 'border');
+    if (border) {
+      return border.value;
+    }
+    return undefined;
+  }
+
   @Input() form!: IForm;
   dynamicFormGroup: FormGroup;
   settingsStore = inject(SettingsStore);
@@ -71,6 +101,6 @@ export class DynamicFormComponent implements OnInit {
   getErrorMessage(control: any) {}
 
   onSelectControl(control: any) {
-    this.settingsStore.setControl(control);
+    this.settingsStore.setSelectedControl(control);
   }
 }

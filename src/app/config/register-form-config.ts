@@ -13,6 +13,20 @@ export const registerFormConfig: IForm = {
       placeholder: '',
       class: 'col-md-6',
       type: 'textbox',
+      settings: [
+        {
+          name: 'name',
+          value: 'firstName',
+        },
+        {
+          name: 'id',
+          value: '123',
+        },
+        {
+          name: 'border',
+          value: '1px solid green',
+        },
+      ],
       validators: [
         {
           validatorName: 'pattern',
@@ -28,9 +42,9 @@ export const registerFormConfig: IForm = {
 
     {
       type: 'textbox',
-      name: 'firstTextbox',
+      name: 'secondName',
       id: 'c4c9f16d-7d1b-47c4-b623-34908be3f94e',
-      label: 'First name',
+      label: 'Second name',
       class: '',
       validators: [],
       value: '',
@@ -39,6 +53,20 @@ export const registerFormConfig: IForm = {
         size: '1px',
       },
       placeholder: 'Enter text here',
+      settings: [
+        {
+          name: 'name',
+          value: 'secondName',
+        },
+        {
+          name: 'id',
+          value: '456',
+        },
+        {
+          name: 'border',
+          value: '1px solid orange',
+        },
+      ],
     },
     {
       type: 'textarea',
@@ -55,6 +83,28 @@ export const registerFormConfig: IForm = {
       },
       rows: 5,
       cols: 30,
+      settings: [
+        {
+          name: 'name',
+          value: 'secondName',
+        },
+        {
+          name: 'id',
+          value: '456',
+        },
+        {
+          name: 'border',
+          value: '1px solid blue',
+        },
+        {
+          name: 'rows',
+          value: '5',
+        },
+        {
+          name: 'cols',
+          value: '30',
+        },
+      ],
     },
     {
       type: 'button',
@@ -65,6 +115,12 @@ export const registerFormConfig: IForm = {
         size: 'none',
       },
       caption: 'Click Me',
+      settings: [
+        {
+          name: 'caption',
+          value: 'Click Me',
+        },
+      ],
     },
     {
       type: 'textarea',

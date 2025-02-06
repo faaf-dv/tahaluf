@@ -38,6 +38,7 @@ export const SettingsStore = signalStore(
           ...store.selectedControl(),
           settings,
         },
+        isErrorsDrawerVisible: store.errors().length > 0,
       }));
       settingsService.updateControlSettings(store.selectedControl(), settings);
     },
